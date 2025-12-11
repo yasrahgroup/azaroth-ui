@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
-import { useLanguage } from "../hooks/useLanguage";
+import { useLanguage } from "../context/LanguageContext";
+import logo from "../assets/logo.png";
 
 type Locale = "en" | "fr" | "ar" | "it" | "de" | "es" | "zh" | "ja" | "ru";
 
@@ -28,6 +29,10 @@ const Header: React.FC = () => {
   const { locale, setLocale, t } = useLanguage();
   const languageMenuRef = useRef<HTMLDivElement>(null);
 
+  // Get the current language info
+  const currentLanguage =
+    languages.find((lang) => lang.code === locale) || languages[0];
+
   const navItems = [
     { id: "home", label: t("nav.home"), path: "/" },
     { id: "about", label: t("nav.about"), path: "/about" },
@@ -53,13 +58,10 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  const currentLanguage =
-    languages.find((lang) => lang.code === locale) || languages[0];
-
   // Get language name from translations
-  const getLanguageName = (code: string) => {
-    return t(`language.${code}` as any) || code;
-  };
+  // const getLanguageName = (code: string) => {
+  //   return t(`language.${code}` as any) || code;
+  // };
 
   return (
     <header className="w-full bg-white shadow-sm sticky top-0 z-50">
@@ -74,10 +76,10 @@ const Header: React.FC = () => {
                 aria-haspopup="true"
                 aria-expanded={isLanguageOpen}
               >
-                <span className="text-base">{currentLanguage.flagEmoji}</span>
-                <span className="font-medium">
-                  {getLanguageName(currentLanguage.code)}
-                </span>
+                <span
+                  className={`fi fi-${currentLanguage.flag} rounded mr-2`}
+                ></span>
+                <span className="font-medium">{currentLanguage.name}</span>
                 <FiChevronDown
                   className={`h-4 w-4 transition-transform ${
                     isLanguageOpen ? "transform rotate-180" : ""
@@ -92,26 +94,23 @@ const Header: React.FC = () => {
                     role="menu"
                     aria-orientation="vertical"
                   >
-                    {languages.map((language) => (
+                    {languages.map((lang) => (
                       <button
-                        key={language.code}
+                        key={lang.code}
                         onClick={() => {
-                          setLocale(language.code);
+                          setLocale(lang.code);
+                          // Save to localStorage for persistence
+                          localStorage.setItem("i18nextLng", lang.code);
                           setIsLanguageOpen(false);
                         }}
-                        className={`flex items-center w-full px-4 py-2.5 text-sm transition-colors duration-150 ${
-                          locale === language.code
-                            ? "bg-purple-50 text-purple-700"
+                        className={`flex items-center w-full px-4 py-2 text-left text-sm ${
+                          locale === lang.code
+                            ? "bg-gray-100 text-gray-900"
                             : "text-gray-700 hover:bg-gray-50"
                         }`}
-                        role="menuitem"
                       >
-                        <span className="text-lg mr-3">
-                          {language.flagEmoji}
-                        </span>
-                        <span className="flex-1 text-left">
-                          {getLanguageName(language.code)}
-                        </span>
+                        <span className={`fi fi-${lang.flag} mr-2`}></span>
+                        {lang.name}
                       </button>
                     ))}
                   </div>
@@ -147,11 +146,12 @@ const Header: React.FC = () => {
           </div>
 
           {/* Right - Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             <img
-              src="/src/assets/logo.png"
+              src={logo}
               alt="Azaroth Logo"
-              className="h-8 w-auto"
+              className="h-12 w-auto object-contain"
+              style={{ minWidth: "120px" }}
             />
           </div>
 

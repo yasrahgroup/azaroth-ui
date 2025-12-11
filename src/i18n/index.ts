@@ -21,7 +21,7 @@ import jaTranslations from "../utils/translations/ja";
 import ruTranslations from "../utils/translations/ru";
 
 // Map of all translations
-const translations: Record<Locale, Record<string, string>> = {
+export const translations: Record<Locale, Record<string, string>> = {
   en: enTranslations,
   fr: frTranslations,
   ar: arTranslations,

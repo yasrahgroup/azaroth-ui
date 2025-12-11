@@ -18,26 +18,41 @@ export const LanguageContext = createContext<LanguageContextType>({
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [locale, setLocale] = useState<Locale>("en");
+  // Always default to English
+  const [locale, setLocaleState] = useState<Locale>("en");
   const [isRTL, setIsRTL] = useState(false);
 
+  // Update document when component mounts or locale changes
   useEffect(() => {
-    // Update document direction based on language
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
-    document.documentElement.lang = locale;
-  }, [isRTL, locale]);
+    // Force English as default
+    setLocale("en");
+
+    // Update document attributes
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+  }, []);
 
   const t = (key: string): string => {
     return getTranslation(locale, key);
   };
 
+  const setLocale = (newLocale: Locale) => {
+    // Use the selected language, defaulting to English if not provided
+    const finalLocale = newLocale || "en";
+    setLocaleState(finalLocale);
+
+    // Handle RTL for Arabic
+    const isRTL = finalLocale === "ar";
+    setIsRTL(isRTL);
+
+    // Update document attributes
+    document.documentElement.lang = finalLocale;
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+  };
+
   const contextValue = {
     locale,
-    setLocale: (newLocale: Locale) => {
-      setLocale(newLocale);
-      // Update RTL status based on language (Arabic is RTL, others are LTR)
-      setIsRTL(newLocale === "ar");
-    },
+    setLocale,
     t,
     isRTL,
   };
