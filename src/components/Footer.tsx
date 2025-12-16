@@ -2,218 +2,162 @@ import {
   FaFacebook,
   FaTwitter,
   FaLinkedin,
-  FaInstagram,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
-import { useLanguage } from "../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
-const Footer = () => {
-  const { t, isRTL } = useLanguage();
+interface FooterProps {
+  companyName: string;
+  contactInfo: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+  services: string[];
+  quickLinks: Array<{
+    text: string;
+    href: string;
+  }>;
+  socialLinks: {
+    facebook: string;
+    twitter: string;
+    linkedin: string;
+  };
+  copyright: string;
+  socialTitle: string;
+  closingText: string;
+}
+
+const Footer: React.FC<FooterProps> = ({
+  companyName,
+  contactInfo,
+  quickLinks,
+  socialLinks,
+  copyright,
+  socialTitle,
+  closingText,
+}) => {
+  const { t, i18n } = useTranslation();
+
   return (
-    <footer className="bg-white border-t border-gray-200 pt-12 pb-8">
-      <div className="container mx-auto px-4">
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8"
-          dir={isRTL ? "rtl" : "ltr"}
-        >
+    <footer className="bg-white dark:bg-dark-bg border-t border-gray-200 dark:border-gray-700 pt-12 pb-8">
+      <div className="max-w-7xl mx-auto px-6" dir={i18n.dir()}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div
               className={`flex items-center ${
-                isRTL ? "justify-end" : "justify-start"
+                i18n.dir() === "rtl" ? "justify-end" : "justify-start"
               }`}
             >
-              <Logo />
+              <span className="font-bold text-azure-radiance-600 dark:text-azure-radiance-400 text-xl">
+                {companyName}
+              </span>
             </div>
-            <p className="text-gray-600 text-sm">{t("company.description")}</p>
-            <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-purple-600 transition-colors"
-              >
-                <FaFacebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-purple-600 transition-colors"
-              >
-                <FaTwitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-purple-600 transition-colors"
-              >
-                <FaLinkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-purple-600 transition-colors"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </a>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+              {closingText}
+            </p>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <FaEnvelope className="text-azure-radiance-600" />
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="text-gray-600 dark:text-gray-400 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 text-sm"
+                >
+                  {contactInfo.email}
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <FaPhone className="text-azure-radiance-600" />
+                <a
+                  href={`tel:${contactInfo.phone.replace(/\D/g, "")}`}
+                  className="text-gray-600 dark:text-gray-400 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 text-sm"
+                >
+                  {contactInfo.phone}
+                </a>
+              </div>
+              <div className="flex items-start space-x-2">
+                <FaMapMarkerAlt className="text-azure-radiance-600 mt-1 flex-shrink-0" />
+                <span className="text-gray-600 dark:text-gray-400 text-sm">
+                  {contactInfo.address}
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div
+            className={`${i18n.dir() === "rtl" ? "text-right" : "text-left"}`}
+          >
             <h4
-              className={`text-lg font-semibold text-gray-900 mb-4 ${
-                isRTL ? "text-right" : "text-left"
-              }`}
+              className={`text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4`}
             >
               {t("footer.quickLinks")}
             </h4>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("nav.home")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("nav.about")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("nav.services")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/testimonials"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("nav.testimonials")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("nav.contact")}
-                </Link>
-              </li>
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    to={link.href}
+                    className="text-gray-600 dark:text-gray-400 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 text-sm transition-colors block py-1"
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4
-              className={`text-lg font-semibold text-gray-900 mb-4 ${
-                isRTL ? "text-right" : "text-left"
+          {/* Social Media */}
+          <div
+            className={`${i18n.dir() === "rtl" ? "text-right" : "text-left"}`}
+          >
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+              {socialTitle}
+            </h4>
+            <div
+              className={`flex space-x-4 ${
+                i18n.dir() === "rtl" ? "justify-end" : "justify-start"
               }`}
             >
-              {t("footer.ourServices")}
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("footer.services.webDevelopment")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("footer.services.mobileApps")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("footer.services.uiUxDesign")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("footer.services.cloudSolutions")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#services"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors block py-1"
-                >
-                  {t("footer.services.itConsulting")}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4
-              className={`text-lg font-semibold text-gray-900 mb-4 ${
-                isRTL ? "text-right" : "text-left"
-              }`}
-            >
-              {t("footer.contactUs")}
-            </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <FaMapMarkerAlt className="text-purple-600 mt-1 mr-3 flex-shrink-0" />
-                <span className="text-gray-600 text-sm">
-                  {t("footer.address")}
-                </span>
-              </li>
-              <li className="flex items-center">
-                <FaPhone className="text-purple-600 mr-3 flex-shrink-0" />
-                <a
-                  href="tel:+1234567890"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors"
-                >
-                  {t("footer.phone")}
-                </a>
-              </li>
-              <li className="flex items-center">
-                <FaEnvelope className="text-purple-600 mr-3 flex-shrink-0" />
-                <a
-                  href="mailto:info@azaroth.com"
-                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors"
-                >
-                  {t("footer.email")}
-                </a>
-              </li>
-            </ul>
+              <a
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 transition-colors"
+                aria-label="Facebook"
+              >
+                <FaFacebook className="w-6 h-6" />
+              </a>
+              <a
+                href={socialLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 transition-colors"
+                aria-label="Twitter"
+              >
+                <FaTwitter className="w-6 h-6" />
+              </a>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-6 h-6" />
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-200 pt-6">
-          <p className="text-center text-gray-500 text-sm">
-            {t("footer.copyright")}
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6 mt-8">
+          <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
+            {copyright}
           </p>
         </div>
       </div>

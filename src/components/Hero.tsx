@@ -1,17 +1,112 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { motion, Variants } from "framer-motion";
 
-const HeroStrip: React.FC = () => {
+const Hero: React.FC = () => {
+  const { t } = useTranslation();
+  const [isRTL, setIsRTL] = useState(false);
+
+  useEffect(() => {
+    setIsRTL(document.documentElement.dir === "rtl");
+  }, []);
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const MotionButton = motion.button;
+
   return (
-    <section className="bg-gradient-to-r from-blue-800 to-blue-600">
-      <div className="max-w-7xl mx-auto px-6 py-14">
-        <h1 className="text-3xl md:text-4xl font-bold text-white">
-          WELCOME TO AZAROTH TECH-HIVE !
-        </h1>
-        <p className="mt-3 text-lg text-yellow-300 font-medium">
-          Your Premium Digital Solutions Partner
-        </p>
+    <div className="relative bg-gradient-to-br from-blue-800 via-blue-600 to-blue-400 h-screen flex items-center overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/4 -left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-1/3 -right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
-    </section>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <motion.div
+          className={isRTL ? "text-right" : "text-left"}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-nowrap"
+            variants={itemVariants}
+          >
+            {t("hero.welcome")}
+          </motion.h1>
+
+          <motion.p
+            className="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl leading-relaxed"
+            variants={itemVariants}
+          >
+            {t("hero.subtitle")}
+          </motion.p>
+
+          <motion.div variants={itemVariants}>
+            <MotionButton
+              className="bg-white text-blue-700 hover:bg-blue-50 text-lg font-semibold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {t("nav.consultation")}
+            </MotionButton>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes blob {
+            0% {
+              transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+              transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+              transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+              transform: translate(0px, 0px) scale(1);
+            }
+          }
+          .animate-blob {
+            animation: blob 7s infinite;
+          }
+          .animation-delay-2000 {
+            animation-delay: 2s;
+          }
+          .animation-delay-4000 {
+            animation-delay: 4s;
+          }
+        `,
+        }}
+      />
+    </div>
   );
 };
 

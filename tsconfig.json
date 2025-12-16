@@ -18,11 +18,10 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "react", "react-dom"],
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src"],

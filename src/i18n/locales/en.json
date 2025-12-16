@@ -1,0 +1,14 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "blog": "Blog",
+    "requestQuote": "Request for Quote",
+    "connect": "Connect With Us"
+  },
+  "hero": {
+    "welcome": "WELCOME TO AZAROTH TECH-HIVE!",
+    "subtitle": "Your Premium Digital Solutions Partner"
+  },
+  "language": "Language"
+}

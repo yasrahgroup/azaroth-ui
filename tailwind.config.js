@@ -5,23 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          primary: "#7C4DFF", // Violet
-          secondary: "#C158FF", // Magenta
-          accent: "#FFB84C", // Gold
-          peach: "#F29F7E",
-          deep: "#3B2C6E",
-          bgLight: "#F7F7F7",
-          bgDark: "#050312",
-          textLight: "#FFFFFF",
-          textDark: "#111827",
+        'azure-radiance': {
+          '50': '#f0faff',
+          '100': '#e0f4fe',
+          '200': '#b9eafd',
+          '300': '#7ddfff',
+          '400': '#38c7ff',
+          '500': '#0eabf4',
+          '600': '#0089d5',
+          '700': '#006eac',
+          '800': '#005a8c',
+          '900': '#004b73',
+          '950': '#002c44',
         },
-      },
-      boxShadow: {
-        soft: "0 18px 45px rgba(15,23,42,0.18)",
-      },
-      borderRadius: {
-        xl2: "1.25rem",
+        'primary': '#0eabf4',
+        'primary-dark': '#0089d5',
+        'dark-bg': '#0D1117',
+        'dark-card': '#161B22',
       },
       fontFamily: {
         arabic: ['"Noto Sans Arabic"', "sans-serif"],

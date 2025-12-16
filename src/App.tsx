@@ -1,22 +1,47 @@
 // App.tsx - Main application component
-import React from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 
 // Import components
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeaturesSection from "./components/FeaturesSection";
 import AboutSection from "./components/AboutSection";
-import PortfolioGrid from "./components/PortfolioGrid";
-import TestimonialsSection from "./components/TestimonialsSection";
 import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
 
-const App: React.FC = () => {
+function App() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
+
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language, isRTL]);
+
   return (
     <Router>
-      <div className="App min-h-screen flex flex-col">
-        <Header />
+      <div
+        className={`min-h-screen flex flex-col bg-white ${
+          isRTL ? "font-rtl" : ""
+        }`}
+      >
+        <Helmet>
+          <html lang={i18n.language} dir={isRTL ? "rtl" : "ltr"} />
+          <title>{t("meta.title", "Azaroth Tech-Hive")}</title>
+          <meta
+            name="description"
+            content={t(
+              "meta.description",
+              "Your Premium Digital Solutions Partner"
+            )}
+          />
+        </Helmet>
 
+        <Navbar />
+        <Chatbot />
         <main className="flex-grow">
           <Routes>
             <Route
@@ -26,8 +51,6 @@ const App: React.FC = () => {
                   <Hero />
                   <FeaturesSection />
                   <AboutSection />
-                  <PortfolioGrid />
-                  <TestimonialsSection />
                 </>
               }
             />
@@ -55,19 +78,7 @@ const App: React.FC = () => {
                 </div>
               }
             />
-            <Route
-              path="/testimonials"
-              element={
-                <div className="container mx-auto px-4 py-16">
-                  <h1 className="text-4xl font-bold text-center">
-                    Testimonials Page
-                  </h1>
-                  <p className="text-center mt-4">
-                    Testimonials page content coming soon...
-                  </p>
-                </div>
-              }
-            />
+
             <Route
               path="/contact"
               element={
@@ -85,19 +96,17 @@ const App: React.FC = () => {
         </main>
 
         <Footer
-          companyName="PortfolioPro"
-          tagline="Creating exceptional digital experiences that drive results."
-          anniversaryText="Celebrating 5 years of excellence"
+          companyName="AZAROTH TECH-HIVE"
           contactInfo={{
-            email: "contact@portfolioPro.com",
+            email: "info@azaroth-tech.com",
             phone: "+1 (555) 123-4567",
-            address: "123 Design Street, Creative City, CC 12345",
+            address: "123 Tech Street, Digital City, DC 12345",
           }}
           services={[
-            "Web Design",
-            "Development",
-            "UI/UX Design",
+            "Web Development",
             "Mobile Apps",
+            "UI/UX Design",
+            "Cloud Solutions",
           ]}
           quickLinks={[
             { text: "Home", href: "/" },
@@ -110,17 +119,13 @@ const App: React.FC = () => {
             twitter: "#",
             facebook: "#",
           }}
-          anniversaryOffer="Special discount for new clients!"
-          copyright={`© ${new Date().getFullYear()} PortfolioPro. All rights reserved.`}
-          servicesTitle="Services"
-          quickLinksTitle="Quick Links"
-          contactTitle="Contact Info"
+          copyright={`© ${new Date().getFullYear()} AZAROTH TECH-HIVE. All rights reserved.`}
           socialTitle="Follow Us"
           closingText="Built with passion and precision."
         />
       </div>
     </Router>
   );
-};
+}
 
 export default App;

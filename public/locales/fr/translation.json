@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "AZAROTH TECH-HIVE",
+    "description": "Votre Partenaire de Solutions Numériques Premium"
+  },
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "blog": "Blog",
+    "quote": "Demande de devis"
+  },
+  "cta": {
+    "connect": "Connectez-vous avec nous"
+  },
+  "hero": {
+    "heading": "BIENVENUE CHEZ AZAROTH TECH-HIVE !",
+    "subheading": "Votre Partenaire de Solutions Numériques Premium"
+  },
+  "footer": {
+    "companyName": "AZAROTH TECH-HIVE",
+    "rights": "Tous droits réservés.",
+    "quickLinks": "Liens rapides",
+    "socialMedia": "Suivez-nous"
+  },
+  "languages": {
+    "en": "Anglais",
+    "ar": "Arabe",
+    "ru": "Russe",
+    "fr": "Français",
+    "ja": "Japonais",
+    "zh": "Chinois"
+  }
+}

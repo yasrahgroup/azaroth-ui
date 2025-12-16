@@ -1,42 +1,38 @@
 {
   "app": {
-    "title": "Azaroth Tech-Hive",
-    "description": "A modern technology solutions company"
+    "title": "AZAROTH TECH-HIVE",
+    "description": "Your Premium Digital Solutions Partner"
   },
   "nav": {
     "home": "Home",
-    "about": "About",
+    "about": "About Us",
     "services": "Services",
-    "testimonials": "Testimonials",
-    "contact": "Contact"
+    "industries": "Industries",
+    "portfolio": "Portfolio",
+    "insights": "Insights",
+    "careers": "Careers",
+    "contact": "Contact Us",
+    "consultation": "Get Free Consultation"
   },
-  "home": {
-    "title": "Welcome to Azaroth Tech-Hive",
-    "subtitle": "Innovative solutions for your business"
-  },
-  "company": {
-    "description": "Leading technology solutions provider delivering excellence since 2025."
-  },
-  "language": {
-    "select": "Select Language",
-    "en": "English",
-    "fr": "Français",
-    "ar": "العربية",
-    "it": "Italiano",
-    "de": "Deutsch",
-    "es": "Español",
-    "zh": "中文",
-    "ja": "日本語",
-    "ru": "Русский"
-  },
-  "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
+  "hero": {
+    "welcome": "WELCOME TO AZAROTH TECH-HIVE!",
+    "subtitle": "Your Premium Digital Solutions Partner"
   },
   "footer": {
-    "rights": "All rights reserved",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "companyName": "AZAROTH TECH-HIVE",
+    "rights": "All rights reserved.",
+    "quickLinks": "Quick Links",
+    "socialMedia": "Follow Us"
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية",
+    "ru": "Русский",
+    "fr": "Français",
+    "ja": "日本語",
+    "zh": "中文"
+  },
+  "languageSelector": {
+    "label": "Select Language"
   }
 }

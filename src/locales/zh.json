@@ -1,0 +1,20 @@
+{
+  "common": {
+    "welcome": "欢迎来到 Azaroth Tech-Hive",
+    "loading": "加载中...",
+    "error": "发生错误"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "services": "服务",
+    "contact": "联系我们"
+  },
+  "chatbot": {
+    "welcome": "今天有什么可以帮您？",
+    "input_placeholder": "输入您的消息...",
+    "send": "发送",
+    "quick_actions": "快速操作",
+    "assistant": "Azaroth 助手"
+  }
+}

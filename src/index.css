@@ -1,13 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Almarai:wght@400;700;800&display=swap");
+@import "flag-icons/css/flag-icons.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles can be added below */
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    @apply bg-white text-gray-800 font-sans;
+  }
+
+  /* Arabic text styling */
+  html[lang="ar"] body {
+    font-family: "Almarai", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Better line height and letter spacing for Arabic */
+  html[lang="ar"] p,
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3,
+  html[lang="ar"] h4,
+  html[lang="ar"] h5,
+  html[lang="ar"] h6,
+  html[lang="ar"] span,
+  html[lang="ar"] div {
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  /* Adjust list items for RTL */
+  html[lang="ar"] ul,
+  html[lang="ar"] ol {
+    @apply pr-5;
+  }
+
+  /* Better spacing for Arabic text in buttons and inputs */
+  html[lang="ar"] button,
+  html[lang="ar"] input,
+  html[lang="ar"] textarea {
+    line-height: 1.6;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Dark mode support */
+  html.dark body {
+    @apply text-gray-200;
+    background-color: #0d1117;
+  }
+
+  * {
+    @apply transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .bg-hero-gradient {
+    background: linear-gradient(90deg, #005a8c 0%, #0089d5 100%);
+  }
 }

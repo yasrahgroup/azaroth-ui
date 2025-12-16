@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "阿萨罗斯科技蜂巢",
+    "description": "您的优质数字解决方案合作伙伴"
+  },
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "blog": "博客",
+    "quote": "询价"
+  },
+  "cta": {
+    "connect": "联系我们"
+  },
+  "hero": {
+    "heading": "欢迎来到阿萨罗斯科技蜂巢！",
+    "subheading": "您的优质数字解决方案合作伙伴"
+  },
+  "footer": {
+    "companyName": "阿萨罗斯科技蜂巢",
+    "rights": "版权所有。",
+    "quickLinks": "快速链接",
+    "socialMedia": "关注我们"
+  },
+  "languages": {
+    "en": "英语",
+    "ar": "阿拉伯语",
+    "ru": "俄语",
+    "fr": "法语",
+    "ja": "日语",
+    "zh": "中文"
+  }
+}
