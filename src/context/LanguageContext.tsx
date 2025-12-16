@@ -1,54 +1,41 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { Locale, getTranslation } from "../i18n/index";
+import React, { createContext, useState, useEffect, ReactNode, useCallback } from "react";
+import i18n, { isRTL as checkRTL } from "../i18n";
+import { TFunction } from "i18next";
+
+type Locale = 'en' | 'ar' | 'ru' | 'fr' | 'ja' | 'zh';
 
 interface LanguageContextType {
   locale: Locale;
-  setLocale: (locale: Locale) => void;
-  t: (key: string) => string;
+  setLocale: (locale: Locale) => Promise<void>;
+  t: TFunction;
   isRTL: boolean;
 }
 
-export const LanguageContext = createContext<LanguageContextType>({
-  locale: "en",
-  setLocale: () => {},
-  t: (key: string) => key,
-  isRTL: false,
-});
+export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  // Always default to English
-  const [locale, setLocaleState] = useState<Locale>("en");
-  const [isRTL, setIsRTL] = useState(false);
+export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [locale, setLocaleState] = useState<Locale>((i18n.language as Locale) || 'en');
+  const [isRTL, setIsRTL] = useState(checkRTL(i18n.language));
+  const [t, setT] = useState<TFunction>(() => i18n.t.bind(i18n));
 
-  // Update document when component mounts or locale changes
+  // Update RTL status and t function when language changes
   useEffect(() => {
-    // Force English as default
-    setLocale("en");
+    const handleLanguageChange = (lng: string) => {
+      const languageCode = lng.split('-')[0] as Locale;
+      setLocaleState(languageCode);
+      setIsRTL(checkRTL(languageCode));
+      setT(() => i18n.t.bind(i18n));
+    };
 
-    // Update document attributes
-    document.documentElement.lang = "en";
-    document.documentElement.dir = "ltr";
+    i18n.on('languageChanged', handleLanguageChange);
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
   }, []);
 
-  const t = (key: string): string => {
-    return getTranslation(locale, key);
-  };
-
-  const setLocale = (newLocale: Locale) => {
-    // Use the selected language, defaulting to English if not provided
-    const finalLocale = newLocale || "en";
-    setLocaleState(finalLocale);
-
-    // Handle RTL for Arabic
-    const isRTL = finalLocale === "ar";
-    setIsRTL(isRTL);
-
-    // Update document attributes
-    document.documentElement.lang = finalLocale;
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
-  };
+  const setLocale = useCallback(async (newLocale: Locale) => {
+    await i18n.changeLanguage(newLocale);
+  }, []);
 
   const contextValue = {
     locale,
@@ -66,8 +53,8 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
 
 export const useLanguage = () => {
   const context = React.useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
 };

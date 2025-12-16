@@ -12,7 +12,12 @@
     "insights": "Insights",
     "careers": "Careers",
     "contact": "Contact Us",
-    "consultation": "Get Free Consultation"
+    "consultation": "Get Free Consultation",
+    "blog": "Blog",
+    "quote": "Get a Quote"
+  },
+  "cta": {
+    "connect": "Connect With Us"
   },
   "hero": {
     "welcome": "WELCOME TO AZAROTH TECH-HIVE!",
