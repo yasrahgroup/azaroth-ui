@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import LanguageDropdown from "./LanguageDropdown"; // Import the new LanguageDropdown
+import LanguageSelector from "./LanguageSelector";
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,6 @@ const Header: React.FC = () => {
     <header className="bg-white dark:bg-dark-bg shadow-md sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          
           {/* Logo Text */}
           <Link to="/" className="flex items-center">
             <span className="font-bold text-azure-radiance-600 dark:text-azure-radiance-400 text-2xl">
@@ -29,7 +28,7 @@ const Header: React.FC = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
-            {navItems.map(item => (
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -49,17 +48,17 @@ const Header: React.FC = () => {
             >
               {t("cta.connect")}
             </Link>
-            <LanguageDropdown />
+            <LanguageSelector />
           </nav>
 
           {/* Mobile Toggle & Language */}
           <div className="flex items-center md:hidden">
-            <LanguageDropdown />
+            <LanguageSelector />
             <button
-                className="ml-4 text-gray-700 dark:text-gray-300"
-                onClick={() => setOpen(!open)}
+              className="ml-4 text-gray-700 dark:text-gray-300"
+              onClick={() => setOpen(!open)}
             >
-                ☰
+              ☰
             </button>
           </div>
         </div>
@@ -68,7 +67,7 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-white dark:bg-dark-bg border-t border-gray-200 dark:border-gray-700">
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -78,13 +77,13 @@ const Header: React.FC = () => {
               {item.label}
             </Link>
           ))}
-            <Link
-              to="/connect"
-              onClick={() => setOpen(false)}
-              className="block px-6 py-3 bg-azure-radiance-600 text-white text-center font-semibold hover:bg-azure-radiance-700 m-4 rounded-full shadow-lg"
-            >
-              {t("cta.connect")}
-            </Link>
+          <Link
+            to="/connect"
+            onClick={() => setOpen(false)}
+            className="block px-6 py-3 bg-azure-radiance-600 text-white text-center font-semibold hover:bg-azure-radiance-700 m-4 rounded-full shadow-lg"
+          >
+            {t("cta.connect")}
+          </Link>
         </div>
       )}
     </header>

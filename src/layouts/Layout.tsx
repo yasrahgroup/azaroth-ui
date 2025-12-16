@@ -18,10 +18,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       dir={i18n.dir()}
     >
       <Header />
-      <main className="flex-grow">
-        {children}
-      </main>
-      <Footer />
+      <main className="flex-grow">{children}</main>
+      <Footer
+        companyName="Azaroth"
+        contactInfo={{
+          email: "contact@example.com",
+          phone: "+1234567890",
+          address: "123 Business St, City, Country",
+        }}
+        services={["Web Development", "UI/UX Design", "Mobile Apps"]}
+        quickLinks={[
+          { text: "Home", href: "/" },
+          { text: "About", href: "/about" },
+          { text: "Services", href: "/services" },
+          { text: "Contact", href: "/contact" },
+        ]}
+        socialLinks={{
+          facebook: "https://facebook.com",
+          twitter: "https://twitter.com",
+          linkedin: "https://linkedin.com",
+        }}
+        copyright="© 2025 Azaroth. All rights reserved."
+        socialTitle="Follow Us"
+        closingText="Thank you for visiting!"
+      />
     </div>
   );
 };
