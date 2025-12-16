@@ -1,8 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useLanguage } from "../context/LanguageContext";
 import { ChevronDown } from "lucide-react";
 
-const languages = [
+type Locale = "en" | "ar" | "ru" | "fr" | "ja" | "zh";
+
+type Language = {
+  code: Locale;
+  label: string;
+  name: string;
+  country: string;
+  rtl: boolean;
+};
+
+const languages: Language[] = [
   { code: "en", label: "EN", name: "English", country: "US", rtl: false },
   { code: "ar", label: "AR", name: "العربية", country: "SA", rtl: true },
   { code: "ru", label: "RU", name: "Русский", country: "RU", rtl: false },
@@ -11,73 +21,114 @@ const languages = [
   { code: "zh", label: "ZH", name: "中文", country: "CN", rtl: false },
 ] as const;
 
-type LangCode = (typeof languages)[number]["code"];
-
 const LanguageSelector: React.FC = () => {
-  const { i18n } = useTranslation();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const { locale, setLocale } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isChanging, setIsChanging] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const current =
-    languages.find((l) => l.code === i18n.language) || languages[0];
+  const currentLanguage =
+    languages.find((lang) => lang.code === locale) || languages[0];
 
-  const changeLanguage = (code: LangCode) => {
-    const selected = languages.find((l) => l.code === code)!;
-    i18n.changeLanguage(code);
-    document.documentElement.lang = code;
-    document.documentElement.dir = selected.rtl ? "rtl" : "ltr";
-    setOpen(false);
+  const handleLanguageChange = async (newLocale: Locale) => {
+    try {
+      setIsChanging(true);
+      await setLocale(newLocale);
+    } catch (error) {
+      console.error("Failed to change language:", error);
+    } finally {
+      setIsChanging(false);
+      setIsOpen(false);
+    }
   };
 
+  // Close dropdown when clicking outside
   useEffect(() => {
-    const close = (e: MouseEvent) =>
-      ref.current && !ref.current.contains(e.target as Node) && setOpen(false);
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close dropdown when pressing Escape
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
   return (
-    <div ref={ref} className="relative">
-      {/* Trigger */}
+    <div ref={dropdownRef} className="relative">
       <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium
-                   bg-[#1c1c1c] text-white border border-gray-700
-                   rounded-md hover:bg-[#2a2a2a] transition-colors"
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`
+          flex items-center gap-2 px-4 py-2 text-sm font-medium
+          bg-[#1c1c1c] text-white border border-gray-700
+          rounded-md hover:bg-[#2a2a2a] transition-colors
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+          ${isChanging ? "opacity-70" : ""}
+        `}
+        disabled={isChanging}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
         aria-label="Select language"
       >
         <span
-          className={`fi fi-${current.country.toLowerCase()} rounded-sm`}
+          className={`fi fi-${currentLanguage.country.toLowerCase()} rounded-sm`}
           style={{ width: "20px", height: "15px" }}
+          aria-hidden="true"
         />
-        <span className="min-w-[24px] text-left">{current.label}</span>
+        <span className="min-w-[24px] text-left">
+          {isChanging ? "..." : currentLanguage.label}
+        </span>
         <ChevronDown
           size={16}
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+          aria-hidden="true"
         />
       </button>
 
-      {/* Dropdown */}
-      {open && (
+      {isOpen && (
         <div
+          role="listbox"
           className="absolute right-0 mt-1 w-48 bg-[#1c1c1c] border border-gray-700 rounded-md shadow-xl z-50 overflow-hidden"
-          style={{ direction: "ltr" }} // Force LTR for consistent dropdown layout
+          style={{ direction: "ltr" }}
         >
           {languages.map((lang) => (
             <button
               key={lang.code}
-              onClick={() => changeLanguage(lang.code)}
-              className={`flex items-center gap-3 w-full px-4 py-2.5 text-sm text-left
-                transition-colors ${
-                  i18n.language === lang.code
+              role="option"
+              aria-selected={locale === lang.code}
+              onClick={() => handleLanguageChange(lang.code)}
+              className={`
+                flex items-center gap-3 w-full px-4 py-2.5 text-sm text-left
+                transition-colors
+                ${
+                  locale === lang.code
                     ? "bg-gray-700 text-white"
                     : "text-gray-300 hover:bg-gray-700"
-                }`}
+                }
+                focus:outline-none focus:bg-gray-700
+              `}
               dir={lang.rtl ? "rtl" : "ltr"}
             >
               <span
                 className={`fi fi-${lang.country.toLowerCase()} flex-shrink-0`}
                 style={{ width: "20px", height: "15px" }}
+                aria-hidden="true"
               />
               <div className="flex-1 min-w-0">
                 <div className="font-medium">{lang.name}</div>

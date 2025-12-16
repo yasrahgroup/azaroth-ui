@@ -8,12 +8,13 @@ const Header: React.FC = () => {
   const location = useLocation();
   const { t } = useTranslation(); // Use useTranslation from react-i18next
 
+  // Define nav items with type safety
   const navItems = [
-    { path: "/", label: t("nav.home") },
-    { path: "/services", label: t("nav.services") },
-    { path: "/blog", label: t("nav.blog") }, // Changed to /blog and using translation
-    { path: "/quote", label: t("nav.quote") }, // Using translation
-  ];
+    { path: "/", label: "nav.home" },
+    { path: "/services", label: "nav.services" },
+    { path: "/blog", label: "nav.blog" },
+    { path: "/quote", label: "nav.quote" },
+  ] as const;
 
   return (
     <header className="bg-white dark:bg-dark-bg shadow-md sticky top-0 z-40">
@@ -38,7 +39,7 @@ const Header: React.FC = () => {
                     : "text-gray-700 dark:text-gray-300 hover:text-azure-radiance-600 dark:hover:text-azure-radiance-400 hover:bg-azure-radiance-50 dark:hover:bg-azure-radiance-900"
                 }`}
               >
-                {item.label}
+                {t(item.label as any)}
               </Link>
             ))}
 

@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { motion, Variants } from "framer-motion";
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
-  const [isRTL, setIsRTL] = useState(false);
-
-  useEffect(() => {
-    setIsRTL(document.documentElement.dir === "rtl");
-  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

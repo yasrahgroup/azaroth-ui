@@ -11,6 +11,7 @@ import FeaturesSection from "./components/FeaturesSection";
 import AboutSection from "./components/AboutSection";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
+import TranslationTest from "./components/TranslationTest";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -42,6 +43,7 @@ function App() {
 
         <Navbar />
         <Chatbot />
+
         <main className="flex-grow">
           <Routes>
             <Route
@@ -54,6 +56,7 @@ function App() {
                 </>
               }
             />
+
             <Route
               path="/about"
               element={
@@ -65,6 +68,7 @@ function App() {
                 </div>
               }
             />
+
             <Route
               path="/services"
               element={
@@ -95,34 +99,15 @@ function App() {
           </Routes>
         </main>
 
-        <Footer
-          companyName="AZAROTH TECH-HIVE"
-          contactInfo={{
-            email: "info@azaroth-tech.com",
-            phone: "+1 (555) 123-4567",
-            address: "123 Tech Street, Digital City, DC 12345",
-          }}
-          services={[
-            "Web Development",
-            "Mobile Apps",
-            "UI/UX Design",
-            "Cloud Solutions",
-          ]}
-          quickLinks={[
-            { text: "Home", href: "/" },
-            { text: "About", href: "/about" },
-            { text: "Services", href: "/services" },
-            { text: "Contact", href: "/contact" },
-          ]}
-          socialLinks={{
-            linkedin: "#",
-            twitter: "#",
-            facebook: "#",
-          }}
-          copyright={`© ${new Date().getFullYear()} AZAROTH TECH-HIVE. All rights reserved.`}
-          socialTitle="Follow Us"
-          closingText="Built with passion and precision."
-        />
+        {/* ✅ Footer WITHOUT props */}
+        <Footer />
+
+        {/* Development-only route for translation testing */}
+        {process.env.NODE_ENV === "development" && (
+          <Routes>
+            <Route path="/test-translations" element={<TranslationTest />} />
+          </Routes>
+        )}
       </div>
     </Router>
   );

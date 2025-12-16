@@ -254,13 +254,13 @@ const Navbar: React.FC = () => {
             <div className="flex items-center space-x-4">
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-1">
-                <NavItem href="#" text={t("nav.home")} />
-                <NavItem href="#about" text={t("nav.about")} />
-                <NavItem href="#services" text={t("nav.services")} />
-                <NavItem href="#industries" text={t("nav.industries")} />
-                <NavItem href="#portfolio" text={t("nav.portfolio")} />
-                <NavItem href="#insights" text={t("nav.insights")} />
-                <NavItem href="#careers" text={t("nav.careers")} />
+                <NavItem href="/" text={t("nav.home")} />
+                <NavItem href="/about" text={t("nav.about")} />
+                <NavItem href="/services" text={t("nav.services")} />
+                <NavItem href="/industries" text={t("nav.industries")} />
+                <NavItem href="/portfolio" text={t("nav.portfolio")} />
+                <NavItem href="/insights" text={t("nav.insights")} />
+                <NavItem href="/careers" text={t("nav.careers")} />
 
                 {/* Contact Us Dropdown */}
                 <div className="relative group" ref={contactDropdownRef}>
@@ -297,31 +297,31 @@ const Navbar: React.FC = () => {
 
                       <div className="py-2">
                         <a
-                          href="#contact-info"
+                          href="/contact"
                           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-colors duration-200"
                         >
                           Contact Information
                         </a>
                         <a
-                          href="#request-quote"
+                          href="/request-quote"
                           className="block px-4 py-3 text-sm font-medium text-blue-700 hover:bg-blue-50/50 transition-colors duration-200 border-t border-gray-100"
                         >
                           Request a Quote
                         </a>
                         <a
-                          href="#book-meeting"
+                          href="/book-meeting"
                           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-colors duration-200 border-t border-gray-100"
                         >
                           Book a Meeting
                         </a>
                         <a
-                          href="#talk-to-sales"
+                          href="/contact-sales"
                           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-colors duration-200 border-t border-gray-100"
                         >
                           Talk to Sales
                         </a>
                         <a
-                          href="#locations"
+                          href="/locations"
                           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-colors duration-200 border-t border-gray-100"
                         >
                           Our Locations
@@ -333,8 +333,9 @@ const Navbar: React.FC = () => {
               </div>
 
               {/* CTA Button */}
-              <button
-                className="ml-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30"
+              <a
+                href="/free-consultation"
+                className="ml-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 inline-flex items-center"
                 style={{
                   background:
                     "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
@@ -342,7 +343,7 @@ const Navbar: React.FC = () => {
                 }}
               >
                 {t("nav.consultation")}
-              </button>
+              </a>
 
               {/* Mobile menu button */}
               <div className="md:hidden flex items-center">
