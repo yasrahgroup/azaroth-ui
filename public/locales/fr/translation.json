@@ -5,9 +5,14 @@
   },
   "nav": {
     "home": "Accueil",
+    "about": "À propos de nous",
     "services": "Services",
-    "blog": "Blog",
-    "quote": "Demande de devis"
+    "industries": "Secteurs d'activité",
+    "portfolio": "Portefeuille",
+    "insights": "Aperçus",
+    "careers": "Carrières",
+    "contact": "Contactez-nous",
+    "consultation": "Obtenir une consultation gratuite"
   },
   "cta": {
     "connect": "Connectez-vous avec nous"
@@ -18,9 +23,21 @@
   },
   "footer": {
     "companyName": "AZAROTH TECH-HIVE",
-    "rights": "Tous droits réservés.",
+    "tagline": "Construit avec passion et précision.",
+    "contactUs": "Contactez-nous",
+    "address": "123 Rue de la Technologie, Ville Numérique, DC 12345",
+    "email": "info@azaroth-tech.com",
+    "phone": "+1 (555) 123-4567",
     "quickLinks": "Liens rapides",
-    "socialMedia": "Suivez-nous"
+    "newsletter": "Bulletin d'information",
+    "newsletterText": "Abonnez-vous à notre newsletter pour les dernières mises à jour et informations.",
+    "emailPlaceholder": "Votre adresse e-mail",
+    "subscribe": "S'abonner",
+    "newsletterPrivacy": "Nous respectons votre vie privée. Désabonnement à tout moment.",
+    "rights": "© 2025 AZAROTH TECH-HIVE. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "sitemap": "Plan du site"
   },
   "languages": {
     "en": "Anglais",

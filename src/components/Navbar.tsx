@@ -148,12 +148,12 @@ const Navbar: React.FC = () => {
   // const flexDirectionClass = isRTL ? "flex-row-reverse" : "flex-row";
 
   const languages = [
-    { code: "en", name: "English", flag: "🇬🇧" },
-    { code: "ar", name: "العربية", flag: "🇸🇦" },
-    { code: "ru", name: "Русский", flag: "🇷🇺" },
-    { code: "fr", name: "Français", flag: "🇫🇷" },
-    { code: "ja", name: "日本語", flag: "🇯🇵" },
-    { code: "zh", name: "中文", flag: "🇨🇳" },
+    { code: "en", name: "English", flag: "us" },
+    { code: "ar", name: "العربية", flag: "sa" },
+    { code: "ru", name: "Русский", flag: "ru" },
+    { code: "fr", name: "Français", flag: "fr" },
+    { code: "ja", name: "日本語", flag: "jp" },
+    { code: "zh", name: "中文", flag: "cn" },
   ] as const;
 
   const currentLanguage =
@@ -194,8 +194,12 @@ const Navbar: React.FC = () => {
             aria-label="Change language"
             aria-expanded={isLanguageDropdownOpen}
           >
-            <span className="text-lg mr-1">{currentLanguage.flag}</span>
-            <span className="mx-1">{currentLanguage.code.toUpperCase()}</span>
+            <span
+              className={`fi fi-${currentLanguage.flag} w-5 h-4 rounded-sm inline-block`}
+            ></span>
+            <span className="mx-1 text-sm font-medium">
+              {currentLanguage.code.toUpperCase()}
+            </span>
             <FiChevronDown
               className={`transition-transform ${
                 isLanguageDropdownOpen ? "transform rotate-180" : ""
@@ -221,7 +225,9 @@ const Navbar: React.FC = () => {
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
-                  <span className="text-base mr-2">{lang.flag}</span>
+                  <span
+                    className={`fi fi-${lang.flag} w-5 h-4 rounded-sm inline-block mr-2`}
+                  ></span>
                   {lang.name}
                 </button>
               ))}
@@ -235,12 +241,12 @@ const Navbar: React.FC = () => {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center">
-              <div className="h-10 w-10">
+            <div className="flex-shrink-0 flex items-center rtl:space-x-reverse space-x-3">
+              <div className="h-10 w-10 flex-shrink-0">
                 <Logo className="text-gray-900" />
               </div>
-              <span className="ml-3 text-2xl font-extrabold bg-gradient-to-r from-[#1E2A78] to-[#2F3FD4] bg-clip-text text-transparent">
-                AZAROTH TECH-HIVE
+              <span className="text-2xl font-extrabold bg-gradient-to-r from-[#1E2A78] to-[#2F3FD4] bg-clip-text text-transparent whitespace-nowrap">
+                {t("app.title")}
               </span>
             </div>
 

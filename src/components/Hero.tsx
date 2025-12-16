@@ -46,33 +46,34 @@ const Hero: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
         <motion.div
-          className={isRTL ? "text-right" : "text-left"}
+          className="flex flex-col items-center text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-nowrap"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
             variants={itemVariants}
           >
             {t("hero.welcome")}
           </motion.h1>
 
-          <motion.p
-            className="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl leading-relaxed"
-            variants={itemVariants}
-          >
-            {t("hero.subtitle")}
-          </motion.p>
-
-          <motion.div variants={itemVariants}>
-            <MotionButton
-              className="bg-white text-blue-700 hover:bg-blue-50 text-lg font-semibold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+          <motion.div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+            <motion.p
+              className="text-xl md:text-2xl text-white font-medium"
+              variants={itemVariants}
             >
-              {t("nav.consultation")}
-            </MotionButton>
+              {t("hero.subtitle")}
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <MotionButton
+                className="bg-white text-blue-700 hover:bg-blue-50 text-lg font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl whitespace-nowrap"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {t("nav.consultation")}
+              </MotionButton>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
