@@ -1,0 +1,42 @@
+{
+  "app": {
+    "title": "Azaroth Tech-Hive",
+    "description": "A modern technology solutions company"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Welcome to Azaroth Tech-Hive",
+    "subtitle": "Innovative solutions for your business"
+  },
+  "company": {
+    "description": "Leading technology solutions provider delivering excellence since 2025."
+  },
+  "language": {
+    "select": "Select Language",
+    "en": "English",
+    "fr": "Français",
+    "ar": "العربية",
+    "it": "Italiano",
+    "de": "Deutsch",
+    "es": "Español",
+    "zh": "中文",
+    "ja": "日本語",
+    "ru": "Русский"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
