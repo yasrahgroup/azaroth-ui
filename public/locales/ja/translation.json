@@ -5,9 +5,14 @@
   },
   "nav": {
     "home": "ホーム",
+    "about": "私たちについて",
     "services": "サービス",
-    "blog": "ブログ",
-    "quote": "見積もり依頼"
+    "industries": "業界",
+    "portfolio": "ポートフォリオ",
+    "insights": "インサイト",
+    "careers": "採用情報",
+    "contact": "お問い合わせ",
+    "consultation": "無料相談を受ける"
   },
   "cta": {
     "connect": "お問い合わせ"
@@ -18,9 +23,21 @@
   },
   "footer": {
     "companyName": "アザロステックハイブ",
-    "rights": "全著作権所有。",
+    "tagline": "情熱と精密さを込めて構築。",
+    "contactUs": "お問い合わせ",
+    "address": "〒123-4567 東京都デジタルシティ テクノロジー通り123",
+    "email": "info@azaroth-tech.com",
+    "phone": "+1 (555) 123-4567",
     "quickLinks": "クイックリンク",
-    "socialMedia": "フォローする"
+    "newsletter": "ニュースレター",
+    "newsletterText": "最新のアップデートとインサイトをニュースレターでお届けします。",
+    "emailPlaceholder": "メールアドレス",
+    "subscribe": "購読する",
+    "newsletterPrivacy": "プライバシーを尊重します。いつでも購読を解除できます。",
+    "rights": "© 2025 アザロステックハイブ 全著作権所有。",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "sitemap": "サイトマップ"
   },
   "languages": {
     "en": "英語",

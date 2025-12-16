@@ -5,9 +5,14 @@
   },
   "nav": {
     "home": "首页",
+    "about": "关于我们",
     "services": "服务",
-    "blog": "博客",
-    "quote": "询价"
+    "industries": "行业",
+    "portfolio": "作品集",
+    "insights": "洞见",
+    "careers": "职业发展",
+    "contact": "联系我们",
+    "consultation": "免费咨询"
   },
   "cta": {
     "connect": "联系我们"
@@ -18,9 +23,21 @@
   },
   "footer": {
     "companyName": "阿萨罗斯科技蜂巢",
-    "rights": "版权所有。",
+    "tagline": "用激情和精准打造。",
+    "contactUs": "联系我们",
+    "address": "科技街123号，数字城，DC 12345",
+    "email": "info@azaroth-tech.com",
+    "phone": "+1 (555) 123-4567",
     "quickLinks": "快速链接",
-    "socialMedia": "关注我们"
+    "newsletter": "电子报",
+    "newsletterText": "订阅我们的电子报，获取最新动态和见解。",
+    "emailPlaceholder": "您的电子邮箱地址",
+    "subscribe": "订阅",
+    "newsletterPrivacy": "我们尊重您的隐私。随时可以退订。",
+    "rights": "© 2025 阿萨罗斯科技蜂巢 版权所有。",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "sitemap": "网站地图"
   },
   "languages": {
     "en": "英语",

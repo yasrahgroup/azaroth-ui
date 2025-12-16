@@ -1,51 +1,54 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import Backend from "i18next-http-backend";
 
-// Import translations
-import en from "./locales/en.json";
-import ar from "./locales/ar.json";
-import ru from "./locales/ru.json";
-import fr from "./locales/fr.json";
-import ja from "./locales/ja.json";
-import zh from "./locales/zh.json";
-
-// Type for translation keys
-export type TranslationKey = keyof typeof en;
-
-const resources = {
-  en: { translation: en },
-  ar: { translation: ar },
-  ru: { translation: ru },
-  fr: { translation: fr },
-  ja: { translation: ja },
-  zh: { translation: zh },
-} as const;
+// Supported languages
+const supportedLngs = ["en", "ar", "ru", "fr", "ja", "zh"] as const;
+type LanguageCode = (typeof supportedLngs)[number];
 
 // RTL languages
-const rtlLanguages = ["ar"];
+const rtlLanguages = new Set<LanguageCode>(["ar"]);
 
 // Function to check if language is RTL
-const isRTL = (lang: string) => rtlLanguages.includes(lang);
+export const isRTL = (lang: string): boolean =>
+  rtlLanguages.has(lang as LanguageCode);
 
 // Function to get text direction
-const getDirection = (lang: string) => (isRTL(lang) ? "rtl" : "ltr");
+export const getDirection = (lang: string): "rtl" | "ltr" =>
+  isRTL(lang) ? "rtl" : "ltr";
+
+// Type for translation keys
+declare module "i18next" {
+  interface CustomTypeOptions {
+    resources: {
+      translation: typeof import("../public/locales/en/translation.json");
+    };
+  }
+}
+
+export type TranslationKey =
+  keyof typeof import("../public/locales/en/translation.json");
 
 // Set initial language from localStorage or browser
 const savedLanguage = localStorage.getItem("i18nextLng");
-const initialLanguage = savedLanguage || navigator.language.split("-")[0];
+const initialLanguage =
+  savedLanguage || navigator.language.split("-")[0] || "en";
 
 i18n
+  .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources,
     lng: initialLanguage,
     fallbackLng: "en",
-    supportedLngs: Object.keys(resources),
+    supportedLngs: [...supportedLngs],
     debug: process.env.NODE_ENV === "development",
     interpolation: {
       escapeValue: false, // React already escapes values
+    },
+    backend: {
+      loadPath: "/locales/{{lng}}/translation.json",
     },
     detection: {
       order: ["localStorage", "navigator"],
@@ -56,9 +59,9 @@ i18n
     },
   });
 
-// Set initial direction
-document.documentElement.dir = getDirection(initialLanguage);
+// Set initial direction on page load
 document.documentElement.lang = initialLanguage;
+document.documentElement.dir = getDirection(initialLanguage);
 
 // Update direction and lang attribute when language changes
 i18n.on("languageChanged", (lng) => {

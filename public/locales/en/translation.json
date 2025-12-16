@@ -20,9 +20,21 @@
   },
   "footer": {
     "companyName": "AZAROTH TECH-HIVE",
-    "rights": "All rights reserved.",
+    "tagline": "Built with passion and precision.",
+    "contactUs": "Contact Us",
+    "address": "123 Tech Street, Digital City, DC 12345",
+    "email": "info@azaroth-tech.com",
+    "phone": "+1 (555) 123-4567",
     "quickLinks": "Quick Links",
-    "socialMedia": "Follow Us"
+    "newsletter": "Newsletter",
+    "newsletterText": "Subscribe to our newsletter for the latest updates and insights.",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "newsletterPrivacy": "We respect your privacy. Unsubscribe at any time.",
+    "rights": "© 2025 AZAROTH TECH-HIVE. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "sitemap": "Sitemap"
   },
   "languages": {
     "en": "English",
